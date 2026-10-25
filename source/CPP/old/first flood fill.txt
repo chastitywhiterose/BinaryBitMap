@@ -1,0 +1,134 @@
+/*
+This is my own primitive attempt at a flood fill algorithm. It's not perfect but it is super fast and I came up with it entirely in my head. It only works on certain polygons and is not a general purpose flood fill operation, but until I find something online to understand, this will be good enough for most things I intend to do.
+
+It works on one fourth of the polygon at a time. Starting from the center and going in each of the 4 possible directions.
+
+This is perhaps not as effective as the flood fill from here:
+https://rosettacode.org/wiki/Bitmap/Flood_fill#C
+But I will write that function later.
+
+*/
+void old_flood_fill(int cx,int cy,uint32_t color)
+{
+ int x,y,x1,x2;
+ uint32_t thiscolor,oldcolor;
+
+ oldcolor=pointer[cx+cy*width]; /*save the color at the center originally*/
+
+ /*top left fourth*/
+ x=cx;
+ y=cy;
+
+ while(pointer[x+y*width]!=color){x-=1;}x+=1;
+
+ while(x<=cx)
+ {
+  x2=x;
+  y=cy;
+  while(1)
+  {
+   x1=x;
+   while(1)
+   {
+    thiscolor=pointer[x+y*width];
+    if(thiscolor!=oldcolor){break;}
+    pointer[x+y*width]=color;    put_pixel(x,y,0xFF0000);
+    x-=1;
+   }
+   y-=1;
+   x=x1;
+   thiscolor=pointer[x+y*width];
+   if(thiscolor!=oldcolor){break;}
+  }
+  x=x2;
+  x+=1;
+ }
+
+/*top right fourth*/
+
+ x=cx;
+ y=cy;
+ while(pointer[x+y*width]!=color){x+=1;}x-=1;
+
+ while(x>cx)
+ {
+  x2=x;
+  y=cy;
+  while(1)
+  {
+   x1=x;
+   while(1)
+   {
+    thiscolor=pointer[x+y*width];
+    if(thiscolor!=oldcolor){break;}
+    pointer[x+y*width]=color;     put_pixel(x,y,0xFF00FF);
+    x+=1;
+   }
+   y-=1;
+   x=x1;
+   thiscolor=pointer[x+y*width];
+   if(thiscolor!=oldcolor){break;}
+  }
+  x=x2;
+  x-=1;
+ }
+
+ /*bottom left fourth*/
+
+ x=cx;
+ y=cy;
+ while(pointer[x+y*width]!=color){x-=1;}x+=1;
+
+ while(x<=cx)
+ {
+  x2=x;
+  y=cy;
+  while(1)
+  {
+   x1=x;
+   while(1)
+   {
+    thiscolor=pointer[x+y*width];
+    if(thiscolor!=oldcolor){break;}
+    pointer[x+y*width]=color;    put_pixel(x,y,0xFFFF00);
+    x-=1;
+   }
+   y+=1;
+   x=x1;
+   thiscolor=pointer[x+y*width];
+   if(thiscolor!=oldcolor){break;}
+  }
+  x=x2;
+  x+=1;
+ }
+
+/*bottom right fourth*/
+
+ x=cx;
+ y=cy;
+ while(pointer[x+y*width]!=color){x+=1;}x-=1;
+
+ while(x>cx)
+ {
+  x2=x;
+  y=cy;
+  while(1)
+  {
+   x1=x;
+   while(1)
+   {
+    thiscolor=pointer[x+y*width];
+    if(thiscolor!=oldcolor){break;}
+    pointer[x+y*width]=color;     put_pixel(x,y,0x00FFFF);
+    x+=1;
+   }
+   y+=1;
+   x=x1;
+   thiscolor=pointer[x+y*width];
+   if(thiscolor!=oldcolor){break;}
+  }
+  x=x2;
+  x-=1;
+ }
+
+}

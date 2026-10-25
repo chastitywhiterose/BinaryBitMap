@@ -1,0 +1,26 @@
+The Binary Bit Map Plus Plus library is a personal experiment to see if using a C++ style class provides benefits over my traditional way of pure C code.
+
+The goal will be much smaller than my C version of the project was but there will be several features.
+
+Class constructors that create image of the desired size.
+Function that fills the image with a checkerboard of any two colors.
+Function that draws a single pixel at a given location.
+Function that draws a line. //From the Bresenham method.
+Function that draws a regular polygon.
+
+As far as other features such as writing different formats of bitmap files, they are the most time consuming things to write but are not completely impossible. I will see how it goes.
+
+I am referencing this book a lot to learn the syntax of making a class and the types of variables it can have.
+https://en.wikibooks.org/wiki/C%2B%2B_Programming
+
+
+
+https://rosettacode.org/wiki/Bitmap/Flood_fill#C
+
+
+
+There is a gcc option "-fno-stack-limit" that I will do more research on. It may be needed for my recursive flood fill function.
+
+A future possibility is learning to use GIL from boost.
+
+https://www.boost.org/doc/libs/1_73_0/libs/gil/doc/html/installation.html
