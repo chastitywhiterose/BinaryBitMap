@@ -1,0 +1,26 @@
+Notes about making frames into animations. Will be fixed later.
+
+//To make a gif animation I can do this.
+//convert -delay 5 f/*.ppm f/video.gif
+
+x264:
+	ffmpeg -r 30 -f image2 -i f/%08d.bmp -vcodec libx264 -preset veryslow -crf 23 -pix_fmt yuv420p f/video.mp4
+x265:
+	ffmpeg -r 30 -f image2 -i f/%08d.bmp -vcodec libx265 -preset veryslow -crf 28 -pix_fmt yuv420p f/video.mp4
+
+magick convert -delay 5 -loop 0 o/*.bmp o/0.gif
+
+
+
+guides on encoding
+
+https://trac.ffmpeg.org/wiki/Encode/H.264
+https://trac.ffmpeg.org/wiki/Encode/H.265
+https://trac.ffmpeg.org/wiki/Encode/AV1
+https://trac.ffmpeg.org/wiki/Encode/VP9
+
+https://ffmpeg.org/general.html#Image-Formats
+
+ffmpeg -formats
+ffmpeg -pix_fmts
+

@@ -1,0 +1,20 @@
+username: chastityrose
+password: veganvirgin1987
+-
+Chastity Checkerboard
+-
+Drawing Checkerboards with the C Programming Language
+-
+There are two multple files in this project and they contain my very best code that has been improved slowly for over a decade as I've found the time to work on my programming. By combining my experience with the C programming language and learning to use the SDL library starting in 2019, I managed to get a checkerboard on my computer screen.
+
+Since then I slowly removed all SDL dependent code and have learned to write the bytes of image file formats such as PBM,BMP, and even TIFF! I also invented my own image format which will be part of it's own project soon.
+
+There are many ways to draw a checkerboard but I'm proud of this because it was my own work and I understand WHY it works and that's the best part!
+
+In the future I'm hoping to even write a book explaining why it works the way it does. Until then you can email me at chastitywhiterose@gmail.com if you have any questions about using the code. You'll need any valid C or C++ compiler that can use standard library functions.
+-
+second project:
+name: Binary Bit Map
+homepage: https://binary-bit-map.sourceforge.io
+brief: A project dedicated to monochrome images using the C language.
+desc: There are many image formats however I found that many of them work particularly well with black and white. Some formats like PBM,XBM, and WBMP only support these two colors while other common ones such as BMP and PNG efficiently store them better than full color images. I do have code for making other colors but black and white are my favorites and my project will show the beauty of them!

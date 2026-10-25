@@ -1,0 +1,40 @@
+BMP Format Info
+
+The format of the BMP file is well documented and supported by nearly all versions of Windows software as well as by all modern open source software and web browsers.
+
+https://en.wikipedia.org/wiki/BMP_file_format
+
+I took a special interest in this format and set out to learn to write BMP files with my own C programs.
+
+Since my programs can already generate pbm files:
+http://netpbm.sourceforge.net/doc/pbm.html
+I tried using some tools which convert my pbm file into a bmp file.
+
+ffmpeg -i checker.pbm checker-ffmpeg.bmp
+magick convert checker.pbm checker-im.bmp
+gm convert checker.pbm checker-gm.bmp
+gm convert -monochrome checker.pbm checker-gm.bmp
+
+The challenge I faced was to generate a bmp file which was nearly as small as the pbm format, which stores each pixel as a single bit. That is to say that 8 pixels are in each byte! This means that it's THE most efficient way to store images containing only black and white. That is the strength of pbm.
+
+But bmp also has this ability to store 1bpp images. However each different application chooses a format of bmp to save as, and there are many different types. This is unreliable.
+
+The default output of this command:
+
+magick convert checker.pbm checker-im.bmp
+
+Results in a 24bpp file. It's nearly 3 megabytes when converting my image which is 1280x720 pixels in dimensions.
+
+However this option passed to it makes it do what I want.
+magick convert -monochrome checker.pbm checker-im.bmp
+
+
+Similarly, the gm tool which is from GraphicsMagick(a fork of ImageMagick) makes a slightly smaller file because the header is smaller.
+gm convert -monochrome checker.pbm checker-gm.bmp
+
+After reading much documentation I stumbled upon a way to convert to version 2 of bmp. All I had to do was change the file extension!
+
+After that all I needed was to compare the bytes my function was writing with the other image file so that I could make sure I was coding it right. It took me probably 8 hours total to finish it but I can make monochrome bitmap files. RGB might come in the future.
+
+
+magick convert -monochrome checker.pbm checker-im.bmp2

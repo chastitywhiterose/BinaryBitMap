@@ -1,0 +1,25 @@
+Instructions
+http://netpbm.sourceforge.net/getting_netpbm.php
+
+Sourceforce project
+https://sourceforge.net/projects/netpbm/files/
+
+I downloaded the source of the latest release.
+netpbm-10.73.28.tgz
+
+Then ran this command to unpack it from the folder I downloaded it to.
+
+tar -xvf netpbm-10.73.28.tgz
+
+That worked, then I entered the directory.
+
+cd netpbm-10.73.28
+
+./configure
+
+Answered the questions it asked. I selected static libraries but left most things at their defaults.
+
+----
+this told me how to use tar
+https://www.tecmint.com/18-tar-command-examples-in-linux/
+https://kb.iu.edu/d/acfi

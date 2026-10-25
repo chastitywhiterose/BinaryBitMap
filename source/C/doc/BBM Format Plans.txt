@@ -1,0 +1,69 @@
+BBM Format Plans
+
+There are so many decisions to be made when designing my own image format. I know it will be a 1 bit per pixel format much like monochrome BMP files or PBM and XBM.
+
+However the exact details of the header have yet to be decided.
+
+Currently my program produces Windows version 2 BMP files for the checkerboard. This format has been supported since Windows 2.0(released December 9 1987!).
+
+https://en.wikipedia.org/wiki/BMP_file_format
+
+14 bytes for the bitmap file header
+
+12 bytes for the DIB header
+
+6 bytes for the 2 colors in the palette. Each taking 3 bytes for Red, Green, and Blue.
+
+That’s a total of 32 bytes. I love the BMP format but it has a lot of junk data in the header that is reserved or tells how many bytes are in the file.
+
+But my biggest criticism of the format is the fact that the width of each row in bytes must be a multiple of 4. This means hundreds of extra bytes for no good reason.
+
+PBM files only have a few extra bits at the end of the row if the image width is not a multiple of 8 but that’s only because computers operate on 8 bits at a time.
+
+PBM was the first official format that I learned to write with only code from the C standard library. In fact a few printf and looped fputc calls on a file opened in binary writing mode is really all you need. The details of that format are here.
+
+http://netpbm.sourceforge.net/doc/pbm.html
+
+Both the Windows BMP and the NetPBM PBM format are perfectly capable of storing ANY image containing only black and white. They can also pack each pixel into a single bit!
+
+But here is where they differ.
+
+BMP files can have a color palette so that the two colors can be whichever two colors the author chooses.
+
+PBM can be black and white only
+
+BMP requires padding at the end of each row of pixels to be a multiple of 4 bytes.
+
+PBM doesn’t have to have that extra padding and the files will typically be hundreds of bytes smaller.
+
+BMP files have binary headers for the information about the bitmap and how it will be displayed.
+
+PBM files have a plain text header that can be viewed even in Notepad! Yet they still are smaller than the space wasting headers of BMP.
+
+I have decided currently that my format will be called:
+
+BBM: Binary Bit Map
+
+Sort of redundant I know but it was to emphasize that it’s a format for two colors. I reject the gender binary but not the binary numeral system! Also there will be no plain text unlike PBM has.
+
+But the specific details of how the information will be stored has a few things that I’ll need to decide on.
+
+1. Do I have the width and height be 4 bytes each for a total of 8 bytes of a header? That would allow up to 4294967295*4294967295 size images.
+
+Or do I use only two bytes for each which allows a maximum image of 65535*65535? That’s probably bigger than any image that websites allow uploading. A single image would be close to 4 GB!
+
+2. Do I include a color palette like BMP has or should it be strictly black and white for tradition?
+
+3. How will I deal with the extra unused bits when the total number of pixels is not a multiple of 8? Should I use the same routine as for pbm where the end of the row is padded to be a full byte. Or should I use an even more clever method like only padding to a full byte at the end of the entire image? I think there are advantages and disadvantages to each approach.
+
+Additional notes:
+
+Also worth mentioning is the XBM format.
+
+https://en.wikipedia.org/wiki/X_BitMap
+
+XBM is worth mentioning because although it is a text format and takes a lot of space, it is a monochrome format which stores 1 bit per pixel. My own format will be so much like it that converting it to an XBM would be trivial.
+
+Update: 5-31-2019
+
+I did eventually decide to use 16 bit values for the width and height values in my format. I also wrote the "BBM Format.txt" which details my format.

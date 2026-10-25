@@ -1,0 +1,46 @@
+BBM_ffmpeg
+
+This text file is a basic guide and reminder for myself on how to use ffmpeg to achieve animations as I have in the past and will hopefully continue to do.
+
+Suppose that I am in a terminal and in the current directory of a video file named "video.mp4".
+The following command will extract every frame of the video into PPM image files.
+
+ffmpeg -i video.mp4 %08d.ppm
+
+or if your platform doesn't have the software for ppm files, you might prefer Windows Bitmap files.
+
+ffmpeg -i video.mp4 %08d.bmp
+
+The ffmpeg software is capable of a lot of different file formats.
+
+https://ffmpeg.org/general.html#Image-Formats
+
+From the perspective of my BBM library, only certain image formats are useful because I have only written code to read certain types.
+
+Optionally, extract the audio of the video as a wav file.
+
+ffmpeg -i video.mp4 audio.wav
+
+I sometimes extract the audio from the videos I upload from my Nintendo Switch. This audio can then later be put back into the video that will be encoded from the frames.
+
+To just encode the frames into a video without audio included, this worked for me.
+
+ffmpeg -r 30 -f image2 -i %08d.bmp -vcodec libx264 -preset veryslow -crf 23 -pix_fmt yuv420p video.mp4
+
+The "-r 30" in that command means the framerate is 30 frames per second. This can be changed to make a faster or slower video but 30 is the YouTube standard.
+
+If you want to add the audio, you can add it as an input such as:
+
+ffmpeg -i audio.wav -r 30 -f image2 -i %08d.bmp -vcodec libx264 -preset veryslow -crf 23 -pix_fmt yuv420p video.mp4
+
+Here are links with some additional examples of ffmpeg usage.
+
+https://gist.github.com/protrolium/e0dbd4bb0f1a396fcb55
+https://trac.ffmpeg.org/wiki/Encode/H.264
+https://trac.ffmpeg.org/wiki/Encode/H.265
+
+I'm no expert at using ffmpeg and video codecs. I simply copy pasted the commands that worked for my purposes. However I have a feeling that if I had the time to learn more, it's a wildly powerful tool that could do much more advanced things.
+
+Of course my computer is set up with several tools including ffmpeg and the C compiler gcc running under a Unix like environment with msys2 running on Windows 10. I've set it up this way specifically because of my passion for graphics programming. As such, it may not work for everyone, but both the image files as well as the video files that can be produced using ffmpeg are portable and I frequently upload them to Facebook and sometimes YouTube if I think they are high quality.
+
+http://www.videolan.org/x264.html

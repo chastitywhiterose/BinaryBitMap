@@ -1,0 +1,11 @@
+I used the ascii.txt file in a terminal while the fixedsys font was selected.
+Then I cropped the selection where the 6 rows of 16 characters were.
+The image that resulted was 128x90 pixels. Based on my observation, it appears that the width of each character is 8 pixels wide and 15 pixels high.
+
+I saved it as png but then used this command.
+magick convert fixedsys-8x15.png fixedsys-8x15.bmp
+
+The bmp created directly by GIMP could not be loaded by my font library so I am assuming it was compressed or something weird like that.
+
+This particular font seems to be my favorite to use in a text editor when I am programming because it's monospace and quite easy to read. If I can figure out a way to make use of this font for other animations or special projects then it will certainly look cool.
+

@@ -1,0 +1,15 @@
+BBM: Binary Gray Map
+
+2 bytes for the width.
+2 bytes for the height.
+
+1 byte for the bits per pixel setting.
+
+If 1, then the image is identical to a BBM,which is black and white only.
+If 2,4, or 8, it's grayscale with quality higher the more the bpp.
+
+Details and History:
+
+I first invented the BBM: Binary Bit Map format. It was always 1 bit per pixel and was limited to only black and white. The BGM format however allows a extra byte after the width and height values in the header which set the valud to 1,2,4, or 8. This allows any kind of grayscale image. In fact it can do everything the BBM format could plus more.
+
+I have also started work on the BPM: Binary Pixel Map format which will support any colors! These file formats are not supported outside of the programs I have written but I have methods for converting them to other formats. Currently I have BMP and PPM support. A huge challenge I have ahead of me is learning the TIFF format.

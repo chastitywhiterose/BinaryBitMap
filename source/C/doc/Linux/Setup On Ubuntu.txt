@@ -1,0 +1,62 @@
+Because I am using Windows 10 most of my programming is done within the msys2 or cygwin environments because I crave that Unix feel which I can't obtain as my hardware doesn't work well on other operating systems.
+
+However Microsoft does officially support installing Ubuntu Linux inside Windows. It uses something called the Windows Subsystem for Linux(WSL).
+
+The following is copy pasted from the Windows Store Ubuntu app.
+------
+Ubuntu
+Ubuntu on Windows allows one to use Ubuntu Terminal and run Ubuntu command line utilities including bash, ssh, git, apt and many more.
+
+
+
+Note that Windows 10 S does not support running this app.
+
+
+
+Before installing Ubuntu on Windows or before the first run please open the Control Panel, visit Programs and Features' submenu Turn Windows features on or off and select Windows Subsystem for Linux. Click OK, reboot, and then your system is ready to run this app.
+
+
+
+Instead of the above steps You can set up your system by executing the following command in the Administrator PowerShell prompt:
+
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+
+
+
+When your system is ready simply start "ubuntu" in cmd.exe or launch Ubuntu from the start menu.
+
+
+
+This app installs the latest stable Ubuntu LTS release on Windows, switching to the newer LTS release with the first point release. If you would like to use a specific LTS release, for example 16.04, please install the release-specific app, Ubuntu 16.04 on Windows in that case.
+
+
+
+Please note that app updates don't change the Ubuntu installation. To upgrade to a new release please run do-release-upgrade in the Ubuntu Terminal
+
+
+
+For more information about Windows Subsystem for Linux please visit: https://docs.microsoft.com/en-us/windows/wsl/about
+------
+
+By following the directions, I installed Ubuntu within Windows. It's not the same as a real Linux installation but it has no risk either.
+
+Packages can also be updated with "sudo apt-get update". What I have to figure out is where ubuntu is actually storing the files and how I can open them with my windows programs.
+
+https://www.howtogeek.com/261383/how-to-access-your-ubuntu-bash-files-in-windows-and-your-windows-system-drive-in-bash/
+
+C:\Users\chastity\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc
+
+https://www.howtogeek.com/331053/how-to-mount-removable-drives-and-network-locations-in-the-windows-subsystem-for-linux/
+
+---
+The nice thing about Ubuntu is that I can easily install any tools I need.
+
+So far these are the commands I used to install compilers, make, and the Netpbm tools which are all my BBM project requires.
+
+sudo apt install gcc
+sudo apt install g++
+sudo apt install make
+sudo apt install netpbm
+
+By far the most convenient thing I've seen is the way that it tells you what command to use to install a tool if you don't have it available already.
+

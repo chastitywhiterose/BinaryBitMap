@@ -1,0 +1,55 @@
+BPM: Binary Pixel Map
+
+However the format I plan to use is something I have been thinking of for some time. Here is the 16 byte header.
+
+4 bytes for the width
+4 bytes for the height
+
+4 bytes for the bits per pixel
+Accepted values for this will be 1,2,4,8 for grayscale or
+3,6,12,24 for RGB color images.
+
+4 bytes for the pointer to the data.
+
+If 1, then the image is black and white only.
+If 2,4, or 8, it's grayscale with shades of gray equal to 2 to the power of the bits per pixel.
+
+If it is the values 3,6,12, or 24 it can represent images in red, green, and blue levels.
+
+Details and History:
+
+I first invented the BBM: Binary Bit Map format. It was always 1 bit per pixel and was limited to only black and white.
+
+Later on I invented The BGM: Binary Gray Map format accepted 1,2,4, or 8 bits grayscale. I made a function which can efficiently pack the bits into a single byte so that one byte can represent multiple pixels if the bpp is less than 8.
+
+This new BPM: Binary Pixel Map format is one that I invented for several purposes.
+
+Supports up to 24 bit true color images.
+
+Still supports the old efficient and smaller grayscale images.
+
+Supports comments to be included between the header and the pixel data as well as at the end of the pixel data. This was a nice feature that was possible in the Windows BMP format as well because it used a pointer to the data as part of the header. My BPM format can do the same thing.
+
+The name itself is a little joke because BPM is the same three letters as BMP and PBM which are also image formats. Also, it's related to XPM from the X Window System which is also capable of doing any colors of images. The difference is that XPM is plain text and my format is binary mode.
+
+Here are links about those formats I mentioned.
+
+https://en.wikipedia.org/wiki/BMP_file_format
+http://netpbm.sourceforge.net/doc/pbm.html
+https://en.wikipedia.org/wiki/X_PixMap
+
+I don't yet have a fully functioning tool for converting it to other formats but I am thinking that I will make a BPM to BMP format converter because BMP files are supported on Windows by default and I already have code for them.
+
+The exact storage method of the pixels is rather unique. It still uses the high to low bits of each byte for grayscale similar to PBM files did for monochrome. However for the RGB color depths of 3,6,12, or 24, the system is totally different.
+
+Originally I planned on trying to pack the bits into the bytes in a similar way. The problem is that multiples of 3 don't divide into 8 bit bytes. So instead I stole the same idea which is used in the PPM format.
+
+Each red, green, and blue components take up 1 byte regardless of the bit depth. However the maximum value depends on it.
+For 3 bpp the maximum value is 1
+For 6 bpp the maximum value is 3
+For 12 bpp the maximum value is 15
+For 24 bpp the maximum value is 255
+
+This is because the bits per primary color is always the bits per pixel divided by 3. So it makes perfect sense for it to be this way if you understand the math behind powers of two.
+
+You may wonder what the advantage of this is. The goal is very simple. It's possible to reduce the number of colors in the image this way. The reason I want to do this is because then when the images are converted to more popular formats such as PNG and JPEG, they will compress to be far smaller! So space is still saved by choosing lower bit depths.

@@ -1,0 +1,29 @@
+BBM: Binary Bit Map
+
+2 bytes for the width
+2 bytes for the height
+1 bit per pixel from high to low bits.
+
+Details and History:
+
+I set out to make my own image format because I'm a nerd and because I had my criticisms of existing formats. I haven't tried them all yet but my main problem with them was that while studying the format specifications and viewing files in my hex editor I kept thinking: "These bytes in the header or the padding at the end of the row have no information which is absolutely required for a program to display the pixels." I wrote a separate file in which I explained my criticisms of BMP and PBM specifically("BBM Format Plans.txt").
+
+My specific goals for this format were:
+
+1. Should be written specifically for easy reading and displaying of the format by a programmer with even a basic understanding of reading binary mode files.(Like me for example)
+
+2. Must support just two colors, black and white, and store 1 bit per pixel.
+
+3. Have the smallest header of any image format. This header contains only the width and height.
+
+One of the major decisions I had to make in this format was which bit order will I use? While I was writing my functions I discovered that the XBM format uses the low to high bits instead of the high to low bits like PBM for the pixel order. What this means is that in the case of the PBM format, in the first byte of the pixel data, the bit representing 128 is the top left pixel. In XBM it is completely opposite and 1 is the first pixel and 128 is the 8th pixel.
+
+Which bit order was used has no practical advantage over the other but the reason that I decided on using the same bit order as PBM was because from a coding perspective, it means I can use left shifts in the process and pretty much copy paste the loop from my PBM writing function.
+
+Programming:
+
+The BBM format evolved out of my Chastity Checker project. The idea was that since I already have a lot of code for writing various formats, I should first write a function which stores the checkerboard into my new format. Then the challenge is to write a separate function which can read the format and either display it to the screen or simply save it into another format. This means that my image format can then be converted to any other existing image format that ever existed by simply converting it to BMP and then using ImageMagick or GIMP to save to any of the formats those programs support.
+
+I'm still in the programming phase but I do believe that I have finished deciding on the details of my image format. From here it's all just writing tools to process my format and maybe eventually use it in a video game.
+
+In RAM my BBM format is actually loaded into 32 bits per pixel arrays which are allocated and expected to be exactly width*height*4 bytes. This of course means they take 32 times the amount of space that the files do. This is not a problem as long as my programs run on any modern PC although if I needed to, I could totally do a rewrite if I was on a system with limited RAM. The users of any programs I write won't need to know this but of course it's an interesting fact and was done for the reason that I may later decide to make a format that supports up to 32 bit ARGB colors. That means the functions will work the same and will never need changing.

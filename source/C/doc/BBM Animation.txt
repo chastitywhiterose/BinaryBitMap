@@ -1,0 +1,47 @@
+BBM Animation
+
+Commands I can use to accompish all sorts of weird tricks for animations from the command line when combined with other code.
+
+This command can turn the frames from the function above into a valid animated gif file.
+magick convert -delay 5 -loop 0 o/*.bmp o/0.gif
+
+Either of these commands can turn frames into video files. The exact options can always be changed and I've forgotten what all of them actually do because ffmpeg is powerful but complicated.
+
+ffmpeg -r 30 -f image2 -i o/%08d.bmp -vcodec libx264 -preset veryslow -crf 23 -pix_fmt yuv420p o/v.mp4
+
+ffmpeg -r 30 -f image2 -i o/%08d.bmp -vcodec libx265 -preset veryslow -crf 28 -pix_fmt yuv420p o/v.mp4
+
+This command can take the frames out of a video.
+
+ffmpeg -i i/mario3.mp4 -f image2 o/%08d.ppm
+
+To extract the audio
+
+	ffmpeg -i i/mario3.mp4 o/audio.wav
+
+Put audio back into the video and encode the frames.
+
+ffmpeg -i o/audio.wav -r 30 -f image2 -i o/%08d.bmp -vcodec libx264 -crf 25 -pix_fmt yuv420p o/video.mp4
+
+
+---
+
+
+
+
+
+https://support.google.com/youtube/answer/6375112
+2160p: 3840x2160
+1440p: 2560x1440
+1080p: 1920x1080
+720p: 1280x720
+480p: 854x480
+360p: 640x360
+240p: 426x240
+
+
+https://ffmpeg.org/general.html#Image-Formats
+https://trac.ffmpeg.org/wiki/Encode/H.264
+https://trac.ffmpeg.org/wiki/Encode/H.265
+https://trac.ffmpeg.org/wiki/Encode/AV1
+https://trac.ffmpeg.org/wiki/Encode/VP9

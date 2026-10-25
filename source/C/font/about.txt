@@ -1,0 +1,8 @@
+These are the printable ASCII character from hex 0x20 to 0x7E. If I have all these characters I can print pretty much any string of text I would need. I have them separated into groups of 16 characters per line except for the last line because 0x7F is not one of the printable characters. By displaying these characters in the cmd.exe console I was able to select an 8x8 font so I could screenshot it and get a close up of what the pixels are for those characters. This could potentially be useful in future programming or even for spelling things in gigantic letters in the sky in Minecraft.
+
+ !"#$%&'()*+,-./
+0123456789:;<=>?
+@ABCDEFGHIJKLMNO
+PQRSTUVWXYZ[\]^_
+`abcdefghijklmno
+pqrstuvwxyz{|}~ 

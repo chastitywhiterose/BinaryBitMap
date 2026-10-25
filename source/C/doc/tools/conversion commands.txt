@@ -1,0 +1,60 @@
+magick convert -list format
+
+gm convert -list format
+
+
+can convert any file to a raw file.
+
+magick convert fixedsys-8x15.png file.mono
+
+magick convert fixedsys-8x15.png file.rgb
+
+but it's still more useful to just turn things to bmp
+
+magick convert fixedsys-8x15.png fixedsys-8x15.bmp
+
+list files to compare sizes.
+
+ls -l o
+
+---
+imagemagick raw conversion commands
+
+To convert a bmp image to raw pixel data.
+
+magick convert ./o/bbm.bmp ./o/bbm.mono
+magick convert ./o/bbm.bmp ./o/bbm.gray
+magick convert ./o/bbm.bmp ./o/bbm.rgb
+
+To convert raw data back to original image. (using example 512x512 size for my test)
+
+magick convert -size 512x512 ./o/bbm.mono ./o/bbm1.bmp
+magick convert -depth 8 -size 512x512 ./o/bbm.gray ./o/bbm2.bmp
+magick convert -depth 8 -size 512x512 ./o/bbm.rgb ./o/bbm3.bmp
+
+Or to PNG format instead.
+
+magick convert -size 512x512 ./o/bbm.mono ./o/bbm1.png
+magick convert -depth 8 -size 512x512 ./o/bbm.gray ./o/bbm2.png
+magick convert -depth 8 -size 512x512 ./o/bbm.rgb ./o/bbm3.png
+
+---
+more help at:
+
+https://imagemagick.org/script/magick.php
+https://imagemagick.org/script/command-line-options.php#size
+
+
+--
+ffmpeg can do a lot of conversion. I used it for making videos. What I am not so clear on is it's support for certain image formats.
+
+ffmpeg -formats
+ffmpeg -pix_fmts
+
+https://ffmpeg.org/general.html#Image-Formats
+
+https://trac.ffmpeg.org/wiki/Encode/H.264
+https://trac.ffmpeg.org/wiki/Encode/H.265
+https://trac.ffmpeg.org/wiki/Encode/AV1
+https://trac.ffmpeg.org/wiki/Encode/VP9
+
